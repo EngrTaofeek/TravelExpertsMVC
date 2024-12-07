@@ -29,6 +29,11 @@ public partial class Package
     [Column(TypeName = "money")]
     public decimal? PkgAgencyCommission { get; set; }
 
+    [Column("imagePath")]
+    [StringLength(255)]
+    [Unicode(false)]
+    public string? ImagePath { get; set; }
+
     [InverseProperty("Package")]
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 

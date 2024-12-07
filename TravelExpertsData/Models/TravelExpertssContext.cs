@@ -93,6 +93,7 @@ public partial class TravelExpertssContext : DbContext
                 .IsClustered(false);
 
             entity.Property(e => e.PackageId).HasDefaultValue(0);
+            entity.Property(e => e.PaymentStatus).HasDefaultValue("Pending");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Bookings).HasConstraintName("Bookings_FK00");
 
