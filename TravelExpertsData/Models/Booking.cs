@@ -31,6 +31,16 @@ public partial class Booking
 
     public int? PackageId { get; set; }
 
+    [Column("paymentStatus")]
+    [StringLength(50)]
+    public string PaymentStatus { get; set; } = null!;
+
+    [Column("balance", TypeName = "decimal(10, 2)")]
+    public decimal Balance { get; set; }
+
+    [Column("totalPaid", TypeName = "decimal(10, 2)")]
+    public decimal TotalPaid { get; set; }
+
     [InverseProperty("Booking")]
     public virtual ICollection<BookingDetail> BookingDetails { get; set; } = new List<BookingDetail>();
 
