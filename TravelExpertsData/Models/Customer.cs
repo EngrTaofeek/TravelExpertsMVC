@@ -56,7 +56,4 @@ public partial class Customer
 
     [InverseProperty("Customer")]
     public virtual ICollection<CustomersReward> CustomersRewards { get; set; } = new List<CustomersReward>();
-
-    [InverseProperty("Customer")]
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }
