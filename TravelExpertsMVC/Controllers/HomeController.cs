@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using TravelExpertsData;
+using TravelExpertsData.Models;
 using TravelExpertsMVC.Models;
 using TravelExpertsData.Models;
 
@@ -8,17 +10,25 @@ namespace TravelExpertsMVC.Controllers
 {
     public class HomeController : Controller
     {
+        
+        private readonly TravelExpertssContext _context;
+
+     
+
+        public HomeController(TravelExpertssContext context)
         private readonly ILogger<HomeController> _logger;
         private TravelExpertsContext _context { get; set; }
 
         public HomeController(ILogger<HomeController> logger, TravelExpertsContext context)
         {
+            _context = context;
             this._context = context;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+            ViewBag.Packages = PackageManager.GetPackages(_context);
             if (User.Identity.IsAuthenticated)
             {
                 Customer customerDetails = getCurrentUser();
@@ -34,6 +44,12 @@ namespace TravelExpertsMVC.Controllers
 
         public IActionResult Privacy()
         {
+            return View();
+        }
+
+        public IActionResult Bookings()
+        {
+
             return View();
         }
 
