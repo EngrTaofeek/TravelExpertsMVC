@@ -26,6 +26,9 @@ namespace TravelExpertsMVC.Controllers
 
         public IActionResult Index()
         {
+            // Set the current page's controller and action in ViewData
+            ViewData["ActiveController"] = "Home";
+            ViewData["ActiveAction"] = "Index";
             ViewBag.Packages = PackageManager.GetPackages(_context);
             if (User.Identity.IsAuthenticated)
             {
@@ -42,11 +45,22 @@ namespace TravelExpertsMVC.Controllers
 
         public IActionResult Privacy()
         {
+            // Set the current page's controller and action in ViewData
+            ViewData["ActiveController"] = "Home";
+            ViewData["ActiveAction"] = "Privacy";
+            return View();
+        }
+        public IActionResult Register()
+        {
+            // Set the current page's controller and action in ViewData
+            ViewData["ActiveController"] = "Home";
+            ViewData["ActiveAction"] = "Register";
             return View();
         }
 
         public IActionResult Bookings()
         {
+            
 
             return View();
         }

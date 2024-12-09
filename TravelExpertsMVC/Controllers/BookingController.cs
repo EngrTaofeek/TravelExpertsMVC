@@ -9,7 +9,7 @@ using TravelExpertsData;
 using TravelExpertsData.Models;
 using TravelExpertsData.ViewModels;
 
-namespace TravelExpertsMVC.Views
+namespace TravelExpertsMVC.Controllers
 {
     public class BookingController : Controller
     {
@@ -23,16 +23,22 @@ namespace TravelExpertsMVC.Views
         // GET: Booking
         public async Task<IActionResult> Index()
         {
+            // Set the current page's controller and action in ViewData
+            ViewData["ActiveController"] = "Booking";
+            ViewData["ActiveAction"] = "Index";
             var travelExpertssContext = _context.Bookings.Include(b => b.Customer).Include(b => b.Package).Include(b => b.TripType);
             ViewBag.Packages = PackageManager.GetPackages(_context);
             //should update customer Id to that of signed in customer
-            List <BookingViewModel> bookings = BookingManager.GetBookings(_context, 127);
+            List<BookingViewModel> bookings = BookingManager.GetBookings(_context, 127);
             return View(bookings);
         }
 
         // GET: Booking/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            // Set the current page's controller and action in ViewData
+            ViewData["ActiveController"] = "Booking";
+            ViewData["ActiveAction"] = "Details";
             if (id == null)
             {
                 return NotFound();
@@ -46,6 +52,9 @@ namespace TravelExpertsMVC.Views
         // GET: Booking/Create
         public IActionResult Create()
         {
+            // Set the current page's controller and action in ViewData
+            ViewData["ActiveController"] = "Booking";
+            ViewData["ActiveAction"] = "Create";
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustAddress");
             ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName");
             ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId");
@@ -71,8 +80,8 @@ namespace TravelExpertsMVC.Views
             return View(booking);
         }
 
-        
 
-       
+
+
     }
 }

@@ -9,36 +9,68 @@
 	<link rel="stylesheet" href="~/TravelExpertsMVC.styles.css" asp-append-version="true" />
 </head>
 <body>
-	<header>
-		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-			<div class="container-fluid">
-				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TravelExpertsMVC</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-					<ul class="navbar-nav flex-grow-1">
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-						</li>
-					</ul>
-					<ul class="navbar-nav ms-auto">
-						<partial name="_LoginPartial" />
-					</ul>
-					
-				</div>
-			</div>
-		</nav>
-	</header>
-	<div class="container">
-		<main role="main" class="pb-3">
-			@RenderBody()
-		</main>
-	</div>
+
+
+
+    <header class="p-3 text-bg-dark">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark box-shadow mb-3">
+            <div class="container-fluid">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <div style="display: grid; place-items: center;">
+                        <img src="/images/logo.png" alt="mdo" width="60" height="60" class="rounded-circle">
+                        <label class="nav-link px-2 text-white">TRAVEL EXPERTS</label>
+                    </div>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link px-2 text-light @(ViewData["ActiveController"] as string == "Home" && ViewData["ActiveAction"] as string == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link px-2 text-light @(ViewData["ActiveController"] as string == "Booking" && ViewData["ActiveAction"] as string == "Index" ? "active" : "")" asp-area="" asp-controller="Booking" asp-action="Index">Bookings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link px-2 text-light @(ViewData["ActiveController"] as string == "Home" && ViewData["ActiveAction"] as string == "Login" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link px-2 text-light @(ViewData["ActiveController"] as string == "Home" && ViewData["ActiveAction"] as string == "Register" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link px-2 text-light @(ViewData["ActiveController"] as string == "Home" && ViewData["ActiveAction"] as string == "Contact" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link px-2 text-light @(ViewData["ActiveController"] as string == "Home" && ViewData["ActiveAction"] as string == "Privacy" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Privacy">Profile</a>
+                            </li>
+                          
+                        </ul>
+                        <ul class="navbar-nav ms-auto">
+						              <partial name="_LoginPartial" />
+					              </ul>
+                    </div>
+
+                    <!-- Align header-end to the right -->
+                    <div class="header-end ms-auto">
+                        <button type="button" class="btn btn-outline-light me-2">Login</button>
+                        <button type="button" class="btn btn-warning">Sign-up</button>
+                        <button type="button" class="btn btn-outline-light me-2">Log out</button>
+                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/images/man.jpeg" alt="mdo" width="40" height="40" class="rounded-circle">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+
+    
+    
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
 
 	<footer class="border-top footer text-muted">
 		<div class="container">
