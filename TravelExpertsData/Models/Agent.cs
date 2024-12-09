@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TravelExpertsData.Models;
 
+[Index("AgencyId", Name = "IX_Agents_AgencyId")]
 public partial class Agent
 {
     [Key]
@@ -37,7 +38,4 @@ public partial class Agent
 
     [InverseProperty("Agent")]
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
-
-    [InverseProperty("Agent")]
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace TravelExpertsData.Models;
 
-public partial class TravelExpertssContext : DbContext
+public partial class TravelExpertsContext : IdentityDbContext<User>
 {
-    public TravelExpertssContext()
+    public TravelExpertsContext()
     {
     }
 
-    public TravelExpertssContext(DbContextOptions<TravelExpertssContext> options)
+    public TravelExpertsContext(DbContextOptions<TravelExpertsContext> options)
         : base(options)
     {
     }
@@ -59,16 +60,16 @@ public partial class TravelExpertssContext : DbContext
 
     public virtual DbSet<TripType> TripTypes { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
-
     public virtual DbSet<VwPackageProduct> VwPackageProducts { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=localhost\\sqlexpress;Initial Catalog=TravelExperts;Integrated Security=True; TrustServerCertificate=true");
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=TravelExperts;Integrated Security=True; TrustServerCertificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<Admin>(entity =>
         {
             entity.HasKey(e => e.AdminId).HasName("PK__Admin__719FE4E822C8EE62");
@@ -177,7 +178,7 @@ public partial class TravelExpertssContext : DbContext
                 .HasName("aaaaaPackages_PK")
                 .IsClustered(false);
 
-            entity.Property(e => e.PkgAgencyCommission).HasDefaultValue(0m);
+            entity.Property(e => e.PkgAgencyCommission).HasDefaultValue(0.0m);
         });
 
         modelBuilder.Entity<PackagesProductsSupplier>(entity =>
@@ -264,17 +265,6 @@ public partial class TravelExpertssContext : DbContext
             entity.HasKey(e => e.TripTypeId)
                 .HasName("aaaaaTripTypes_PK")
                 .IsClustered(false);
-        });
-
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CC4C1096B9E7");
-
-            entity.HasOne(d => d.Admin).WithMany(p => p.Users).HasConstraintName("FK_Users_Admins");
-
-            entity.HasOne(d => d.Agent).WithMany(p => p.Users).HasConstraintName("FK_Users_Agents");
-
-            entity.HasOne(d => d.Customer).WithMany(p => p.Users).HasConstraintName("FK_Users_Customers");
         });
 
         modelBuilder.Entity<VwPackageProduct>(entity =>

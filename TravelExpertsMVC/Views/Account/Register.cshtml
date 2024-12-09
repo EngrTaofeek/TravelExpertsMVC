@@ -1,0 +1,90 @@
+﻿@model RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+
+<div>
+    <form asp-action="Register" method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div>
+            <label asp-for="CustFirstName" class="control-label"> First Name</label>
+            <input asp-for="CustFirstName" class="form-control" />
+            <span asp-validation-for="CustFirstName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="CustLastName" class="control-label"> Last Name </label>
+            <input asp-for="CustLastName" class="form-control" />
+            <span asp-validation-for="CustLastName" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="CustAddress" class="control-label">Address</label>
+            <input asp-for="CustAddress" class="form-control" />
+            <span asp-validation-for="CustAddress" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="CustCity" class="control-label">City</label>
+            <input asp-for="CustCity" class="form-control" />
+            <span asp-validation-for="CustCity" class="text-danger"></span>
+        </div>
+
+                <div>
+            <label asp-for="CustProv" class="control-label">Province</label>
+            <input asp-for="CustProv" class="form-control" />
+            <span asp-validation-for="CustProv" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="CustPostal" class="control-label">Postal Code</label>
+            <input asp-for="CustPostal" class="form-control" />
+            <span asp-validation-for="CustPostal" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="CustCountry" class="control-label">Country</label>
+            <input asp-for="CustCountry" class="form-control" />
+            <span asp-validation-for="CustCountry" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="CustHomePhone" class="control-label">Home Phone Number</label>
+            <input asp-for="CustHomePhone" class="form-control" />
+            <span asp-validation-for="CustHomePhone" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="CustBusPhone" class="control-label">Business Phone Number</label>
+            <input asp-for="CustBusPhone" class="form-control" />
+            <span asp-validation-for="CustBusPhone" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="CustEmail" class="control-label">Email</label>
+            <input asp-for="CustEmail" class="form-control" />
+            <span asp-validation-for="CustEmail" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Password" class="control-label">Password</label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="ConfirmPassword" class="control-label">Confirm Password</label>
+            <input asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div>
+                <a asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]"> Have an Account? </a>
+            </div>
+            <div>
+                <input type="submit" value="Register" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>

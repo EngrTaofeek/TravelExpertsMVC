@@ -1,41 +1,20 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TravelExpertsData.Models;
-
-[Index("Email", Name = "UQ__Users__A9D105348C971C85", IsUnique = true)]
-public partial class User
+namespace TravelExpertsData.Models
 {
-    [Key]
-    public int UserId { get; set; }
-
-    [StringLength(100)]
-    public string Email { get; set; } = null!;
-
-    public int? AgentId { get; set; }
-
-    public int? AdminId { get; set; }
-
-    public int? CustomerId { get; set; }
-
-    [StringLength(50)]
-    public string Role { get; set; } = null!;
-
-    [StringLength(64)]
-    public string Password { get; set; } = null!;
-
-    [ForeignKey("AdminId")]
-    [InverseProperty("Users")]
-    public virtual Admin? Admin { get; set; }
-
-    [ForeignKey("AgentId")]
-    [InverseProperty("Users")]
-    public virtual Agent? Agent { get; set; }
-
-    [ForeignKey("CustomerId")]
-    [InverseProperty("Users")]
-    public virtual Customer? Customer { get; set; }
+    public class User:IdentityUser
+    {
+        [Key]
+        public int Id { get; set; }
+        [StringLength(100)]
+        public string FullName { get; set; }
+        public int? CustomerId { get; set; }
+        public Customer Customer { get; set; }
+    }
 }

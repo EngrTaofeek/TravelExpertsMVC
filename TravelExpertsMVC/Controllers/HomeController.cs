@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TravelExpertsData;
 using TravelExpertsData.Models;
 using TravelExpertsMVC.Models;
+using TravelExpertsData.Models;
 
 namespace TravelExpertsMVC.Controllers
 {
@@ -14,8 +16,14 @@ namespace TravelExpertsMVC.Controllers
      
 
         public HomeController(TravelExpertssContext context)
+        private readonly ILogger<HomeController> _logger;
+        private TravelExpertsContext _context { get; set; }
+
+        public HomeController(ILogger<HomeController> logger, TravelExpertsContext context)
         {
             _context = context;
+            this._context = context;
+            _logger = logger;
         }
 
         public IActionResult Index()
@@ -24,6 +32,16 @@ namespace TravelExpertsMVC.Controllers
             ViewData["ActiveController"] = "Home";
             ViewData["ActiveAction"] = "Index";
             ViewBag.Packages = PackageManager.GetPackages(_context);
+            if (User.Identity.IsAuthenticated)
+            {
+                Customer customerDetails = getCurrentUser();
+                if (customerDetails != null)
+                {
+                    ViewData["FirstName"] = customerDetails.CustFirstName;
+                }
+
+            }
+
             return View();
         }
 
@@ -53,6 +71,14 @@ namespace TravelExpertsMVC.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public Customer getCurrentUser()
+        {
+            string userName = User.Identity.Name;
+
+            var customer = _context.Customers.FirstOrDefault(cus => cus.CustEmail == userName);
+            return customer;
         }
     }
 }

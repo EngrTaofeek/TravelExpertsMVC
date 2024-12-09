@@ -27,7 +27,4 @@ public partial class Admin
 
     [StringLength(50)]
     public string Role { get; set; } = null!;
-
-    [InverseProperty("Admin")]
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }
