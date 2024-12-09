@@ -11,7 +11,7 @@ namespace TravelExpertsData
     public class PackageManager
     {
         //get all packages
-        public static List<PackageViewModel> GetPackages(TravelExpertssContext db)
+        public static List<PackageViewModel> GetPackages(TravelExpertsContext db)
         {
             return db.Packages.Select(package => new PackageViewModel
             {
@@ -28,7 +28,7 @@ namespace TravelExpertsData
 
         }
          //get package by Id
-        public static PackageViewModel GetPackageById(TravelExpertssContext db,int packageId) {
+        public static PackageViewModel GetPackageById(TravelExpertsContext db,int packageId) {
             Package package = db.Packages.Find(packageId);
             if (package == null) {
                 return null;
