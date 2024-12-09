@@ -11,13 +11,11 @@ namespace TravelExpertsMVC.Controllers
     public class HomeController : Controller
     {
         
-        private readonly TravelExpertssContext _context;
+        private readonly TravelExpertsContext _context;
 
      
 
-        public HomeController(TravelExpertssContext context)
         private readonly ILogger<HomeController> _logger;
-        private TravelExpertsContext _context { get; set; }
 
         public HomeController(ILogger<HomeController> logger, TravelExpertsContext context)
         {

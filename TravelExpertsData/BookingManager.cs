@@ -12,7 +12,7 @@ namespace TravelExpertsData
     public class BookingManager
     {
         //get all packages
-        public static List<BookingViewModel> GetBookings(TravelExpertssContext db, int customerID)
+        public static List<BookingViewModel> GetBookings(TravelExpertsContext db, int customerID)
         {
             return (List<BookingViewModel>)db.Bookings.
                 Include(booking => booking.Package)      // Explicitly load related Package
@@ -33,7 +33,7 @@ namespace TravelExpertsData
 
         }
         //get booking by Id
-        public static BookingViewModel GetBookingById(TravelExpertssContext db, int bookingId)
+        public static BookingViewModel GetBookingById(TravelExpertsContext db, int bookingId)
         {
             Booking booking = db.Bookings
         .Include(b => b.Package) // Load Package

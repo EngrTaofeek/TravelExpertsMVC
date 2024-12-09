@@ -13,9 +13,9 @@ namespace TravelExpertsMVC.Views
 {
     public class BookingController : Controller
     {
-        private readonly TravelExpertssContext _context;
+        private readonly TravelExpertsContext _context;
 
-        public BookingController(TravelExpertssContext context)
+        public BookingController(TravelExpertsContext context)
         {
             _context = context;
         }
