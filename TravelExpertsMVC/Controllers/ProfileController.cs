@@ -29,7 +29,7 @@ namespace TravelExpertsMVC.Controllers
             }
 
             //Display customer data in profile
-            return View(Profile);
+            return View("ProfileView");
         }
 
         //GET: Profile edit view
@@ -40,7 +40,7 @@ namespace TravelExpertsMVC.Controllers
             {
                 return NotFound();
             }
-            return View(ProfileEditor);
+            return View("ProfileEditor");
         }
 
         //POST: Profile Edit View
