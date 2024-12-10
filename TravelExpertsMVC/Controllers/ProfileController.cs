@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using System.IO;
 using System.Web;
 using TravelExpertsData.Models;
@@ -16,6 +17,17 @@ namespace TravelExpertsMVC.Controllers
         public ProfileController(TravelExpertssContext context)
         {
             _context = context;
+        }
+
+        //Hardcode a user for profile example
+        public async Task<IActionResult> ProfileExample()
+        {
+            var user = await _context.Users.Where(u => u.UserId == 7).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View();
         }
 
         //GET: Profile front end display
@@ -80,27 +92,27 @@ namespace TravelExpertsMVC.Controllers
 
         [HttpPost]
         public async Task<IActionResult> ProfilePictureUpload(IFormFile profilePicture)
-    {
-        if (!profilePicture.ContentType.StartsWith("image/"))
         {
-            ViewBag.Message = "Please upload an image file";
+            if (!profilePicture.ContentType.StartsWith("image/"))
+            {
+                ViewBag.Message = "Please upload an image file";
+                return View();
+            }
+            var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+
+            var filePath = Path.Combine(uploadPath, profilePicture.FileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await profilePicture.CopyToAsync(stream);
+            }
+
+            ViewBag.profilePicture = profilePicture.FileName;
+
             return View();
-        }
-        var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
-        if (!Directory.Exists(uploadPath))
-        {
-            Directory.CreateDirectory(uploadPath);
-        }
-
-        var filePath = Path.Combine(uploadPath, profilePicture.FileName);
-        using (var stream = new FileStream(filePath, FileMode.Create))
-        {
-            await profilePicture.CopyToAsync(stream);
-        }
-
-        ViewBag.profilePicture = profilePicture.FileName;
-
-        return View();
         }
     }
 }

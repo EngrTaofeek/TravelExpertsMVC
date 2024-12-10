@@ -18,6 +18,16 @@ namespace TravelExpertsMVC.Controllers
             return View();
         }
 
+        public IActionResult Profile()
+        {
+            return View("Profile");
+        }
+
+        public IActionResult EditProfile()
+        {
+            return View("ProfileEdit");
+        }
+
         public IActionResult Privacy()
         {
             return View();
