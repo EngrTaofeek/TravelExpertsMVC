@@ -1,10 +1,28 @@
 ﻿@model ProfileEditorModel
 @{
-
+	ViewBag.Title = "Profile Editor";
 }
 	<div>
 		<form asp-action="ProfileView" method="get" asp-route-returnUrl="@ViewData["ReturnUrl"]">
 			<div asp-validation-summary="All" class="text-danger"></div>
+		@if (!string.IsNullOrEmpty(Model.ProfilePicturePath))
+		{
+			<div>
+				<img src="@Url.content(Model.ProfilePicturePath)" alt="Profile Picture" />
+			</div>
+		}
+		else
+		{
+			<img src="~/images/DefaultProfilePicture.jpg" />
+		}
+
+		 <div> 
+		 	<label for="ProfileImage">Upload Profile Image</label> 
+		 	<input type="file" name="ProfileImage" id="ProfileImage" /> 
+		 </div> 
+		 <div> 
+		 	<input type="submit" value="Upload Image" /> 
+		 </div> 
 
 			<div>
 				<label asp-for="FirstName" class="control-label"> First Name</label>
@@ -76,8 +94,8 @@
 			</div>
 
 			<div>
-				<input type="submit" value="Finish Editing" />
-
+				<input type="submit" value="Finish Editing" class="btn btn-primary"/>
+				<input type="reset" value="Reset" class="btn btn-secondary" />
 			</div>
 		</form>
 	</div>
