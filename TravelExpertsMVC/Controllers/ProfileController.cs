@@ -22,7 +22,7 @@ namespace TravelExpertsMVC.Controllers
         //Hardcode a user for profile example
         public async Task<IActionResult> ProfileExample()
         {
-            var user = await _context.Users.Where(u => u.UserId == 7).FirstOrDefaultAsync();
+            var user = await _context.Customers.Where(u => u.CustomerId == 1).FirstOrDefaultAsync();
             if (user == null)
             {
                 return NotFound();

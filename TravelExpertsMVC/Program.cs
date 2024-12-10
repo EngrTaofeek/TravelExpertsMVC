@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using TravelExpertsData.Models;
+
 namespace TravelExpertsMVC
 {
     public class Program
@@ -5,6 +8,8 @@ namespace TravelExpertsMVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<TravelExpertssContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
