@@ -19,6 +19,7 @@ namespace TravelExpertsMVC.Controllers
         }
 
         //GET: Profile front end display
+        [Route("Profile")]
         public async Task<IActionResult> Profile(int CustomerId)
         {
             //Get Customer data from database
@@ -33,6 +34,7 @@ namespace TravelExpertsMVC.Controllers
         }
 
         //GET: Profile edit view
+        [Route("ProfileEdit")]
         public async Task<IActionResult> ProfileEdit(int CustomerId)
         {
             var ProfileEditor = await _context.Customers.ToListAsync();

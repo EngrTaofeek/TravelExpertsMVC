@@ -7,16 +7,7 @@
 	<form asp-action="ProfileView" method="get" asp-route-returnUrl="@ViewData["ReturnUrl"]">
 		<div asp-validation-summary="All" class="text-danger"></div>
 
-		@if (!string.IsNullOrEmpty(Model.ProfilePicturePath))
-		{
-			<div>
-				<img src="@Url.content(Model.ProfilePicturePath)" alt="Profile Picture" />
-			</div>
-		}
-		else
-		{
 			<img src="~/images/DefaultProfilePicture.jpg"/>
-		}
 
 		<div>
 			<label asp-for="FirstName" class="control-label"> First Name</label>
