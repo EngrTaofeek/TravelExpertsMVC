@@ -5,7 +5,8 @@
 	<div>
 		<form asp-action="ProfileView" method="get" asp-route-returnUrl="@ViewData["ReturnUrl"]">
 			<div asp-validation-summary="All" class="text-danger"></div>
-		@if (!string.IsNullOrEmpty(Model.ProfilePicturePath))
+		
+			@if (!string.IsNullOrEmpty(Model.ProfilePicturePath))
 		{
 			<div>
 				<img src="@Url.content(Model.ProfilePicturePath)" alt="Profile Picture" />

@@ -7,14 +7,6 @@
 	<form asp-action="ProfileView" method="get" asp-route-returnUrl="@ViewData["ReturnUrl"]">
 		<div asp-validation-summary="All" class="text-danger"></div>
 
-		@* <div> *@
-		@* 	<label for="ProfileImage">Upload Profile Image</label> *@
-		@* 	<input type="file" name="ProfileImage" id="ProfileImage" /> *@
-		@* </div> *@
-		@* <div> *@
-		@* 	<input type="submit" value="Upload Image" /> *@
-		@* </div> *@
-
 		@if (!string.IsNullOrEmpty(Model.ProfilePicturePath))
 		{
 			<div>

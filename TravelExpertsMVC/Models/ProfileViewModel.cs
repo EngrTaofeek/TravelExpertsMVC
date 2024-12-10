@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using TravelExpertsMVC.Controllers;
 
 namespace TravelExpertsMVC.Models
 {
