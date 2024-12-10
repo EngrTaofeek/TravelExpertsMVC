@@ -1,12 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System.Web;
 using TravelExpertsData.Models;
+using TravelExpertsMVC.Models;
 
 namespace TravelExpertsMVC.Controllers
 {
     public class ProfileController : Controller
     {
         private readonly TravelExpertssContext _context;
+        private string imageFolder = "~/images/";
+
 
         public ProfileController(TravelExpertssContext context)
         {
@@ -22,6 +27,7 @@ namespace TravelExpertsMVC.Controllers
             {
                 return NotFound();
             }
+
             //Display customer data in profile
             return View(Profile);
         }
@@ -65,9 +71,36 @@ namespace TravelExpertsMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Profile", new { id = Customer.CustomerId});
+                return RedirectToAction("Profile", new { id = Customer.CustomerId });
             }
             return View();
+        }
+
+        //getting User data for profile
+        public ActionResult Index()
+        {
+            var model = new ProfileViewModel
+            {
+                ProfilePicturePath = "~/Uploads/images/"
+            };
+
+            return View(model);
+        }
+
+        //Handling User Image Upload
+        [HttpPost]
+        public ActionResult UploadImage(HttpPostedFileBase ProfileImage)
+        {
+            if (ProfileImage != null)
+            {
+                var allowExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                var fileExtensions = Path.GetExtension(ProfileImage.FileName).ToLower();
+
+                if (allowExtensions.Contains(fileExtensions)) 
+                {
+                    var user = TravelExpertsData.Models.Customer.Find();
+                }
+            }
         }
     }
 }
