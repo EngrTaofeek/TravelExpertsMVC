@@ -81,7 +81,7 @@ namespace TravelExpertsMVC.Controllers
         {
             var model = new ProfileViewModel
             {
-                ProfilePicturePath = "~/Uploads/images/"
+                ProfilePicturePath = "~/images/"
             };
 
             return View(model);
@@ -98,7 +98,16 @@ namespace TravelExpertsMVC.Controllers
 
                 if (allowExtensions.Contains(fileExtensions)) 
                 {
-                    var user = TravelExpertsData.Models.Customer.Find();
+                    var fileName = Guid.NewGuid().ToString() + fileExtensions;
+                    var filePath = Path.Combine(TravelExpertsMVC.MapPath("~/wwwroot/images"), fileName);
+
+                    var directory = Path.GetDirectoryName(filePath);
+                    if (!Directory.Exists(directory))
+                    {
+                        Directory.CreateDirectory(directory);
+                    }
+
+                    ProfileImage.SaveAs(filePath);
                 }
             }
         }
