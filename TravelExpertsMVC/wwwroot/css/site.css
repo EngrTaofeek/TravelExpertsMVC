@@ -25,13 +25,9 @@ body {
     margin: 20px;
 }
 
-/*
-HTML,CSS AND JS Assignmet 
-Author: Taofeek Oduola 
-Date: 1st October 2024 
-Course: CPRG-210-A --> */
 
-/* General body styles */
+
+/* General body styles imported */
 
 
 h1,
@@ -502,3 +498,86 @@ li strong {
     .tab-content.active {
         display: block;
     }
+<style >
+/* Credit card container: horizontal layout */
+.credit-card-container {
+    display: flex;
+    flex-direction: row; /* Horizontal alignment */
+    flex-wrap: wrap; /* Wrap to next line if space runs out */
+    gap: 20px;
+    margin-top: 15px;
+}
+
+/* Individual credit card option */
+.credit-card-option {
+    width: 200px; /* Fixed width for consistent card size */
+    padding: 10px;
+    display: inline-block;
+    border: 3px solid black; /* Default outline */
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Smaller card images (50x30px) */
+.credit-card-image {
+    width: 50px;
+    height: 30px;
+    margin-right: 10px; /* Space between image and details */
+    border-radius: 4px;
+}
+
+/* Credit card details layout */
+.card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px; /* Minimal spacing between lines */
+    font-size: 12px; /* Compact font size */
+    color: #333;
+}
+
+/* Credit card name */
+.card-name {
+    font-weight: bold;
+    font-size: 14px; /* Slightly larger for emphasis */
+    color: #041441;
+    margin: 0;
+}
+
+/* Credit card number */
+.card-number {
+    margin: 0;
+    font-size: 12px;
+}
+
+/* Expiry and balance details */
+.card-expiry-balance {
+    margin: 0;
+    font-size: 11px;
+    color: #555;
+}
+
+/* Hide default radio buttons */
+.credit-card-radio {
+    display: none;
+}
+
+    /* Highlight selected card */
+    .credit-card-radio:checked + .credit-card-label {
+        border-color: gold; /* Gold outline */
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.8); /* Subtle glow */
+        border: gold; /* SELECTED outline */
+        border-radius: 8px;
+        background: gold;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+/* Hover effect for better usability */
+.credit-card-option:hover {
+    background-color: #f9f9f9; /* Light hover effect */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+</style >
+

@@ -1,61 +1,137 @@
-﻿@model TravelExpertsData.Models.Booking
+﻿@model TravelExpertsData.ViewModels.PrebookingCreationViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Booking";
 }
 
-<h1>Create</h1>
+<h1>Create New Booking</h1>
 
-<h4>Booking</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="BookingDate" class="control-label"></label>
-                <input asp-for="BookingDate" class="form-control" />
-                <span asp-validation-for="BookingDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BookingNo" class="control-label"></label>
-                <input asp-for="BookingNo" class="form-control" />
-                <span asp-validation-for="BookingNo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TravelerCount" class="control-label"></label>
-                <input asp-for="TravelerCount" class="form-control" />
-                <span asp-validation-for="TravelerCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CustomerId" class="control-label"></label>
-                <select asp-for="CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="TripTypeId" class="control-label"></label>
-                <select asp-for="TripTypeId" class ="form-control" asp-items="ViewBag.TripTypeId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Balance" class="control-label"></label>
-                <input asp-for="Balance" class="form-control" />
-                <span asp-validation-for="Balance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalPaid" class="control-label"></label>
-                <input asp-for="TotalPaid" class="form-control" />
-                <span asp-validation-for="TotalPaid" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container booking-container" style="padding-bottom: 50px;">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    <div class="row">
+        <!-- Package Image Section -->
+        <div class="col-md-6 booking-image">
+            <img id="booking-image" src="@Model.Package?.ImagePath" alt="Package Image" class="img-fluid">
+        </div>
+
+        <!-- Booking Form Section -->
+        <div class="col-md-6 booking-details">
+            <form asp-action="Create" method="post">
+                <h2 class="mb-3">Booking Details</h2>
+
+                <!-- Package Name (Read-only) -->
+                <div class="form-group">
+                    <label for="package-name">Package Name</label>
+                    <input type="text" id="package-name" class="form-control" name="PackageName" value="@Model.Package?.Name" readonly>
+                </div>
+
+                <!-- Package Date of Booking -->
+                <div class="form-group">
+                    <label for="booking-date">Date of Booking</label>
+                    <input type="text" id="booking-date" class="form-control" name="BookingDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly>
+                </div>
+
+                <!-- Package Description -->
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" class="form-control" name="Description" rows="3" readonly>
+                        @Model.Package?.Description
+                        </textarea>
+                </div>
+
+
+                <!-- Package Price -->
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" id="price" class="form-control" name="Price" value="@Model.Package?.TotalPrice.ToString("C")" readonly>
+                </div>
+
+                <!-- Package Start Date -->
+                <div class="form-group">
+                    <label for="start-date">Start Date</label>
+                    <input type="text" id="start-date" class="form-control" name="StartDate" value="@Model.Package?.StartDate.ToString(" yyyy-MM-dd")" readonly>
+                </div>
+
+                <!-- Package End Date -->
+                <div class="form-group">
+                    <label for="end-date">End Date</label>
+                    <input type="text" id="end-date" class="form-control" name="EndDate" value="@Model.Package?.EndDate.ToString(" yyyy-MM-dd")" readonly>
+                </div>
+
+                <!-- Number of Travelers -->
+                <div class="form-group">
+                    <label for="TravelersCount">Number of Travelers</label>
+                    <input type="number" id="TravelersCount" class="form-control" name="TravelersCount" min="1" placeholder="Enter number of travelers">
+                    <div id="traveler-error" class="text-danger"></div>
+                </div>
+
+                <!-- Type of Trip (Dropdown) -->
+                <div class="form-group">
+                    <label for="tripTypeSelect">Type of Trip</label>
+                    <select id="tripTypeSelect" name="TripTypeId" class="form-control" required>
+                        <option value="" disabled selected>Select a trip type</option>
+                        @foreach (var tripType in Model.TripTypes)
+                        {
+                        <option value="@tripType.TripTypeId">@tripType.Ttname</option>
+                        }
+                    </select>
+                    <span id="tripTypeError" class="text-danger" style="display: none;">Please select a trip type.</span>
+                </div>
+
+
+                <!-- Credit Card Selection -->
+                <div class="form-group">
+                    <label for="credit-card-select" class="form-label">Select a Credit Card</label>
+                    <div class="credit-card-container">
+                        @foreach (var card in Model.CreditCards)
+                        {
+                        <div class="credit-card-option">
+                            <input type="radio" id="card-@card.CreditCardId" name="SelectedCreditCardId" value="@card.CreditCardId" class="credit-card-radio" />
+                            <label for="card-@card.CreditCardId" class="credit-card-label">
+                                <img src="@card.CreditCardImagePath" alt="@card.CCName Card Image" class="credit-card-image" />
+                                <div class="card-details">
+                                    <p class="card-name"><strong>@card.CCName</strong></p>
+                                    <p class="card-number">**** **** **** @card.CCNumber.Substring(card.CCNumber.Length - 4)</p>
+                                    <p class="card-expiry-balance">
+                                        Expiry: @card.CCExpiry.ToString("MM/yy") | Balance: @card.Balance.ToString("C")
+                                    </p>
+                                </div>
+                            </label>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <!--Hidden inputs just to supply data to the form-->
+                <input type="hidden" name="Package.TotalPrice" value="@Model.Package.TotalPrice" />
+                <input type="hidden" name="Package.Id" value="@Model.Package.Id" />
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-book btn-block"
+                        style="background-color: #041441; color: #ffff; margin-top: 10px;">
+                    Book Now
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<script>
+    document.querySelectorAll(".credit-card-radio").forEach(radio => {
+        radio.addEventListener("change", function () {
+            console.log("Selected Credit Card ID:", this.value);
+        });
+    });
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    document.getElementById("tripTypeSelect").addEventListener("change", function () {
+        console.log("Selected Trip Type ID:", this.value);
+    });
+</script>

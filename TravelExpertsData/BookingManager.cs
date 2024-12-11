@@ -22,7 +22,7 @@ namespace TravelExpertsData
             BookingId = booking.BookingId,
             CustomerId = (int)booking.CustomerId,
             BookingNumber = booking.BookingNo,
-            Package = new PackageViewModel { Id= booking.Package.PackageId, Name = booking.Package.PkgName, Description = booking.Package.PkgDesc, StartDate = (DateTime) booking.Package.PkgStartDate, EndDate = (DateTime)booking.Package.PkgEndDate, BasePrice = booking.Package.PkgBasePrice, AgencyCommission = (decimal)booking.Package.PkgAgencyCommission, ImagePath = booking.Package.ImagePath },
+            Package = new PackageViewModel { Id= booking.Package.PackageId, Name = booking.Package.PkgName, Description = booking.Package.PkgDesc, StartDate = (DateTime) booking.Package.PkgStartDate, EndDate = (DateTime)booking.Package.PkgEndDate, BasePrice = booking.Package.PkgBasePrice, AgencyCommission = (decimal)booking.Package.PkgAgencyCommission, ImagePath = booking.Package.ImagePath ?? "/images/destination5.jpg" },
             TripTypeName = booking.TripType.Ttname,
             TravelersCount = (int)booking.TravelerCount,
             BookingDate = booking.BookingDate,
@@ -61,7 +61,7 @@ namespace TravelExpertsData
                 EndDate = booking.Package.PkgEndDate ?? DateTime.MinValue,
                 BasePrice = booking.Package.PkgBasePrice,
                 AgencyCommission = booking.Package.PkgAgencyCommission ?? 0,
-                ImagePath = booking.Package.ImagePath
+                ImagePath = booking.Package.ImagePath ?? "/images/destination5.jpg"
             }
             : null,
                     TripTypeName = booking.TripType.Ttname,

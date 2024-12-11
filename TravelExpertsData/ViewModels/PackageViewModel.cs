@@ -16,6 +16,7 @@ namespace TravelExpertsData.ViewModels
         public DateTime EndDate { get; set; }
         public decimal BasePrice { get; set; }
         public decimal AgencyCommission {  get; set; }
+        public decimal TotalPrice { get; set; }
         public string ImagePath { get; set; }
     }
 }

@@ -8,11 +8,6 @@
 }
 
 <h1>Create New Bookings</h1>
-
- <p>
-     <a asp-action="Create">Create New</a>
- </p>
-<h2 class="text-center mb-5 fw-bold">Our Packages Crafted Just For You</h2>
 <!-- Bootstrap Carousel Structure -->
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <ul class="carousel-indicators"></ul>
@@ -27,77 +22,48 @@
     </a>
 </div>
 
-<h1>Past Bookings</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TravelersCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Balance)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalPaid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Package.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Package.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TripTypeName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TravelersCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Balance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPaid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Package.Name)
-            </td>
-            <td>
-                 @Html.DisplayFor(modelItem => item.Package.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TripTypeName)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.BookingId">Details</a> 
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<h1 class="text-center my-4">Past Bookings</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>@Html.DisplayName("Booking Date")</th>
+                <th>@Html.DisplayName("Booking No")</th>
+                <th>@Html.DisplayName("Travelers Count")</th>
+                <th>@Html.DisplayName("Payment Status")</th>
+                <th>@Html.DisplayName("Balance")</th>
+                <th>@Html.DisplayName("Total Paid")</th>
+                <th>@Html.DisplayName("Package Name")</th>
+                <th>@Html.DisplayName("Package Description")</th>
+                <th>@Html.DisplayName("Trip Type Name")</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.BookingNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TravelersCount)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PaymentStatus)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Balance)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalPaid)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Package.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Package.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TripTypeName)</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.BookingId" class="btn btn-primary btn-sm">
+                            Details
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div style="padding-bottom= 50px;"></div>
 @section Scripts {
     <!-- Include the specific Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -126,8 +92,10 @@
         carouselIndicators.innerHTML = "";
 
         packages.forEach((pkg, index) => {
-            const packageId = pkg.Id;
+            const packageId = pkg.id;
             console.log(pkg);
+            console.log(pkg.id);
+
 
             // Create indicator item
             const indicator = document.createElement("li");
@@ -158,7 +126,7 @@
                 <h5>${pkg.name}</h5>
                 <p style="color: #ffff;">${pkg.description}</p>
                 <p style="color: #ffff;">${pkg.startDate.split("T")[0]} to ${pkg.endDate.split("T")[0]}</p>
-                <h2>$ ${pkg.basePrice}</h2>
+                <h2>$ ${pkg.totalPrice}</h2>
 
             `;
 
@@ -174,9 +142,11 @@
             );
             viewButton.textContent = "Book this Package";
 
-            // Add click listener to the button
+           // Add click listener to the button
             viewButton.addEventListener("click", (e) => {
-               //navigate to booking page
+                // Navigate to the booking Create page with the package ID
+                const url = `/Booking/Create?packageId=${pkg.id}`;
+                window.location.href = url;
             });
 
             // Append the button to the caption
