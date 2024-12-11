@@ -8,11 +8,6 @@
 }
 
 <h1>Create New Bookings</h1>
-
- <p>
-     <a asp-action="Create">Create New</a>
- </p>
-<h2 class="text-center mb-5 fw-bold">Our Packages Crafted Just For You</h2>
 <!-- Bootstrap Carousel Structure -->
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <ul class="carousel-indicators"></ul>
@@ -126,8 +121,10 @@
         carouselIndicators.innerHTML = "";
 
         packages.forEach((pkg, index) => {
-            const packageId = pkg.Id;
+            const packageId = pkg.id;
             console.log(pkg);
+            console.log(pkg.id);
+
 
             // Create indicator item
             const indicator = document.createElement("li");
@@ -158,7 +155,7 @@
                 <h5>${pkg.name}</h5>
                 <p style="color: #ffff;">${pkg.description}</p>
                 <p style="color: #ffff;">${pkg.startDate.split("T")[0]} to ${pkg.endDate.split("T")[0]}</p>
-                <h2>$ ${pkg.basePrice}</h2>
+                <h2>$ ${pkg.totalPrice}</h2>
 
             `;
 
@@ -174,9 +171,11 @@
             );
             viewButton.textContent = "Book this Package";
 
-            // Add click listener to the button
+           // Add click listener to the button
             viewButton.addEventListener("click", (e) => {
-               //navigate to booking page
+                // Navigate to the booking Create page with the package ID
+                const url = `/Booking/Create?packageId=${pkg.id}`;
+                window.location.href = url;
             });
 
             // Append the button to the caption

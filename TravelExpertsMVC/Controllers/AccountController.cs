@@ -82,9 +82,10 @@ namespace TravelExpertsMVC.Controllers
                 User user = new()
                 {
                     CustomerId = 144,
-                    UserName = registerModel.CustEmail,
+                    //commented just so the code on my branch can run
+                    //UserName = registerModel.CustEmail,
                     Email = registerModel.CustEmail,
-                    FullName = registerModel.CustFirstName+" "+registerModel.CustLastName
+                    //FullName = registerModel.CustFirstName+" "+registerModel.CustLastName
                 };
                 //store user object in db
                 var result = await userManager.CreateAsync(user, registerModel.Password!);

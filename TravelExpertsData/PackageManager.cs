@@ -20,6 +20,7 @@ namespace TravelExpertsData
                 Description = package.PkgDesc,
                 AgencyCommission = package.PkgAgencyCommission ?? 0,
                 BasePrice = package.PkgBasePrice,
+                TotalPrice = package.PkgBasePrice + (package.PkgAgencyCommission ?? 0),
                 StartDate = (DateTime)package.PkgStartDate,
                 EndDate = (DateTime)package.PkgEndDate,
                 ImagePath = package.ImagePath
@@ -29,7 +30,7 @@ namespace TravelExpertsData
         }
          //get package by Id
         public static PackageViewModel GetPackageById(TravelExpertsContext db,int packageId) {
-            Package package = db.Packages.Find(packageId);
+            Package package = db.Packages.FirstOrDefault(p => p.PackageId == packageId);
             if (package == null) {
                 return null;
             }
@@ -42,6 +43,7 @@ namespace TravelExpertsData
                     Description = package.PkgDesc,
                     AgencyCommission = package.PkgAgencyCommission ?? 0,
                     BasePrice = package.PkgBasePrice,
+                    TotalPrice = package.PkgBasePrice + (package.PkgAgencyCommission ?? 0),
                     StartDate = (DateTime)package.PkgStartDate,
                     EndDate = (DateTime)package.PkgEndDate,
                     ImagePath = package.ImagePath

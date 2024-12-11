@@ -277,7 +277,7 @@
         carouselIndicators.innerHTML = "";
 
         packages.forEach((pkg, index) => {
-            const packageId = pkg.Id;
+            const packageId = pkg.id;
             console.log(pkg);
 
             // Create indicator item
@@ -309,7 +309,7 @@
                 <h5>${pkg.name}</h5>
                 <p style="color: #ffff;">${pkg.description}</p>
                 <p style="color: #ffff;">${pkg.startDate.split("T")[0]} to ${pkg.endDate.split("T")[0]}</p>
-                <h2>$ ${pkg.basePrice}</h2>
+                <h2>$ ${pkg.totalPrice}</h2>
                
             `;
 
@@ -328,6 +328,8 @@
             // Add click listener to the button
             viewButton.addEventListener("click", (e) => {
                //navigate to booking page
+                const url = `/Booking/Create?packageId=${packageId}`;
+                window.location.href = url;
             });
 
             // Append the button to the caption

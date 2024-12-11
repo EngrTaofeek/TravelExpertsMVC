@@ -18,6 +18,8 @@ namespace TravelExpertsData.ViewModels
         public decimal Balance { get; set; }
         public decimal TotalPaid { get; set; }
         public PackageViewModel Package { get; set; }
+        public int SelectedCreditCardId { get; set; }
+        public string TripTypeId { get; set; }
 
     }
 }
