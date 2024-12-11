@@ -23,7 +23,7 @@ namespace TravelExpertsData
                 TotalPrice = package.PkgBasePrice + (package.PkgAgencyCommission ?? 0),
                 StartDate = (DateTime)package.PkgStartDate,
                 EndDate = (DateTime)package.PkgEndDate,
-                ImagePath = package.ImagePath
+                ImagePath = package.ImagePath ?? "/images/destination5.jpg"
 
             }).ToList();
 
@@ -46,7 +46,7 @@ namespace TravelExpertsData
                     TotalPrice = package.PkgBasePrice + (package.PkgAgencyCommission ?? 0),
                     StartDate = (DateTime)package.PkgStartDate,
                     EndDate = (DateTime)package.PkgEndDate,
-                    ImagePath = package.ImagePath
+                    ImagePath = package.ImagePath ?? "/images/destination5.jpg"
 
                 };
             }

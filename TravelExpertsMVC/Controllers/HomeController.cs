@@ -5,6 +5,7 @@ using TravelExpertsData;
 using TravelExpertsData.Models;
 using TravelExpertsMVC.Models;
 using TravelExpertsData.Models;
+using TravelExpertsData.ViewModels;
 
 namespace TravelExpertsMVC.Controllers
 {
@@ -63,6 +64,13 @@ namespace TravelExpertsMVC.Controllers
             
 
             return View();
+        }
+        public IActionResult ContactUs()
+        {
+            // Use ContactManager to fetch data
+            var agenciesWithAgents = ContactManager.GetAgenciesWithAgents(_context);
+            // Pass the data to the view
+            return View(agenciesWithAgents);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

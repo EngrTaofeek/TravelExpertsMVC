@@ -1,0 +1,62 @@
+﻿@model List<TravelExpertsData.ViewModels.ContactViewModel>
+
+<div class="container">
+    <h1 class="text-center mb-4">Contact Us</h1>
+
+    @foreach (var agency in Model)
+    {
+        <div class="agency-section mb-5">
+            <h3 class="mb-3">@agency.City</h3>
+            <p class="agency-details" style="text-align:center;">
+                <strong>Address:</strong> @agency.Address<br>
+                <strong>Location:</strong> @agency.City, @agency.Province @agency.PostalCode<br>
+                <strong>Phone:</strong> @agency.Phone<br>
+                <strong>Fax:</strong> @agency.Fax
+            </p>
+
+            <h4 class="mt-4 mb-3">Our Agents</h4>
+            @if (agency.Agents.Any())
+            {
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    @foreach (var agent in agency.Agents)
+                    {
+                        <div class="col">
+                            <div class="card agent-card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">@agent.FirstName @agent.LastName</h5>
+                                    <p class="card-text"><strong>Position:</strong> @agent.Position</p>
+                                    <p class="card-text"><strong>Phone:</strong> @agent.BusinessPhone</p>
+                                    <p class="card-text"><strong>Email:</strong> @agent.Email</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No agents available for this agency.</p>
+            }
+        </div>
+    }
+</div>
+<div class="container mt-5">
+    <h2 class="text-center">Send Feedback</h2>
+
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success text-center">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <textarea class="form-control" name="feedbackText" rows="5" placeholder="Enter your feedback here..." required></textarea>
+        </div>
+        <div class="form-group text-center mt-3">
+            <button type="submit" class="btn btn-primary">Send Feedback</button>
+        </div>
+    </form>
+</div>
