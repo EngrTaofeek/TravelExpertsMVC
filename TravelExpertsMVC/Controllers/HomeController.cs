@@ -36,7 +36,7 @@ namespace TravelExpertsMVC.Controllers
                 if (customerDetails != null)
                 {
                     ViewData["FirstName"] = customerDetails.CustFirstName;
-                    ViewData["ProfilePicture"] = customerDetails.ProfileImagePath;
+                    ViewData["ProfilePicture"]=customerDetails.ProfileImagePath;
                 }
 
             }

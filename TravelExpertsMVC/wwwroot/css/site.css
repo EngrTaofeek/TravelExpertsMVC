@@ -507,8 +507,14 @@ li strong {
     position: relative;
     display: grid;
     justify-content: flex-end;
+    margin-right: 20px;
 }
 
 .user-logout{
     display:flex;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-left: 12%;
 }

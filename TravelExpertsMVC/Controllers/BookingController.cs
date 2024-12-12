@@ -23,6 +23,7 @@ namespace TravelExpertsMVC.Controllers
         // GET: Booking
         public async Task<IActionResult> Index()
         {
+            getCurrentUser();
             // Set the current page's controller and action in ViewData
             ViewData["ActiveController"] = "Booking";
             ViewData["ActiveAction"] = "Index";
@@ -78,6 +79,21 @@ namespace TravelExpertsMVC.Controllers
             ViewData["PackageId"] = new SelectList(_context.Packages, "PackageId", "PkgName", booking.PackageId);
             ViewData["TripTypeId"] = new SelectList(_context.TripTypes, "TripTypeId", "TripTypeId", booking.TripTypeId);
             return View(booking);
+        }
+
+        public Customer getCurrentUser()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                string userName = User.Identity.Name;
+
+                var customer = _context.Customers.FirstOrDefault(cus => cus.CustEmail == userName);
+                ViewData["FirstName"] = customer.CustFirstName;
+                ViewData["ProfilePicture"] = customer.ProfileImagePath;
+                return customer;
+            }
+            return null;
+
         }
 
 

@@ -1,4 +1,4 @@
-﻿@model RegisterViewModel
+﻿@model ProfileViewModel
 @{
 	ViewBag.Title = "Profile";
 }
@@ -64,18 +64,6 @@
 		<input asp-for="CustEmail" class="form-control" />
 		<span asp-validation-for="CustEmail" class="text-danger"></span>
 	</div>
-
-@* 	<div>
-		<label asp-for="Password" class="control-label">Password</label>
-		<input asp-for="Password" class="form-control" />
-		<span asp-validation-for="Password" class="text-danger"></span>
-	</div>
-
-	<div>
-		<label asp-for="ConfirmPassword" class="control-label">Confirm Password</label>
-		<input asp-for="ConfirmPassword" class="form-control" />
-		<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-	</div> *@
 
 	<div style="margin: 14px 5px 0px 11px;">
 		@if (!string.IsNullOrEmpty(Model.ProfileImagePath))

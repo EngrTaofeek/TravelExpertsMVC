@@ -25,6 +25,9 @@ public partial class CreditCard
 
     public int CustomerId { get; set; }
 
+    [Column(TypeName = "decimal(18, 2)")]
+    public decimal Balance { get; set; }
+
     [ForeignKey("CustomerId")]
     [InverseProperty("CreditCards")]
     public virtual Customer Customer { get; set; } = null!;

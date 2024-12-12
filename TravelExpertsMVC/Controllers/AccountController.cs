@@ -141,11 +141,13 @@ namespace TravelExpertsMVC.Controllers
         {
             // Retrieve current user
             var currentUser = getCurrentUser(); // Your existing method to get the logged-in customer
+            ViewData["FirstName"] = currentUser.CustFirstName;
+            ViewData["ProfilePicture"] = currentUser.ProfileImagePath;
             if (currentUser == null)
                 return RedirectToAction("Login", "Account");
 
             // Populate the view model with existing data
-            var model = new RegisterViewModel
+            var model = new ProfileViewModel
             {
                 CustFirstName = currentUser.CustFirstName,
                 CustLastName = currentUser.CustLastName,
@@ -164,7 +166,7 @@ namespace TravelExpertsMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ProfileAsync(RegisterViewModel model)
+        public async Task<IActionResult> ProfileAsync(ProfileViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -229,5 +231,6 @@ namespace TravelExpertsMVC.Controllers
             var customer = context.Customers.FirstOrDefault(cus => cus.CustEmail == userName);
             return customer;
         }
+
     }
 }
