@@ -44,9 +44,14 @@ public partial class Customer
 
     public int? AgentId { get; set; }
 
+    public string? ProfileImagePath { get; set; }
+
     [ForeignKey("AgentId")]
     [InverseProperty("Customers")]
     public virtual Agent? Agent { get; set; }
+
+    //[InverseProperty("Customer")]
+    //public virtual ICollection<AspNetUser> AspNetUsers { get; set; } = new List<AspNetUser>();
 
     [InverseProperty("Customer")]
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();

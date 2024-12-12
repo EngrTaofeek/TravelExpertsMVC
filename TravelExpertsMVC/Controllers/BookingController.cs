@@ -24,6 +24,7 @@ namespace TravelExpertsMVC.Controllers
         // GET: Booking
         public async Task<IActionResult> Index()
         {
+            getCurrentUser();
             // Set the current page's controller and action in ViewData
             ViewData["ActiveController"] = "Booking";
             ViewData["ActiveAction"] = "Index";
@@ -136,6 +137,21 @@ namespace TravelExpertsMVC.Controllers
             var random = new Random();
             var randomDigits = random.Next(10000, 99999); // Generate a random 5-digit number
             return $"GR4{randomDigits}";
+        }
+
+        public Customer getCurrentUser()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                string userName = User.Identity.Name;
+
+                var customer = _context.Customers.FirstOrDefault(cus => cus.CustEmail == userName);
+                ViewData["FirstName"] = customer.CustFirstName;
+                ViewData["ProfilePicture"] = customer.ProfileImagePath;
+                return customer;
+            }
+            return null;
+
         }
 
 

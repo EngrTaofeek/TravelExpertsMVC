@@ -1,0 +1,84 @@
+﻿@model ProfileViewModel
+@{
+	ViewBag.Title = "Profile";
+}
+
+<h2>Profile</h2>
+
+<form asp-action="Profile" method="post" enctype="multipart/form-data">
+	<div asp-validation-summary="All" class="text-danger"></div>
+
+	<div>
+		<label asp-for="CustFirstName" class="control-label"> First Name</label>
+		<input asp-for="CustFirstName" class="form-control" />
+		<span asp-validation-for="CustFirstName" class="text-danger"></span>
+	</div>
+
+	<div>
+		<label asp-for="CustLastName" class="control-label"> Last Name </label>
+		<input asp-for="CustLastName" class="form-control" />
+		<span asp-validation-for="CustLastName" class="text-danger"></span>
+	</div>
+	<div>
+		<label asp-for="CustAddress" class="control-label">Address</label>
+		<input asp-for="CustAddress" class="form-control" />
+		<span asp-validation-for="CustAddress" class="text-danger"></span>
+	</div>
+	<div>
+		<label asp-for="CustCity" class="control-label">City</label>
+		<input asp-for="CustCity" class="form-control" />
+		<span asp-validation-for="CustCity" class="text-danger"></span>
+	</div>
+
+	<div>
+		<label asp-for="CustProv" class="control-label">Province</label>
+		<input asp-for="CustProv" class="form-control" />
+		<span asp-validation-for="CustProv" class="text-danger"></span>
+	</div>
+	<div>
+		<label asp-for="CustPostal" class="control-label">Postal Code</label>
+		<input asp-for="CustPostal" class="form-control" />
+		<span asp-validation-for="CustPostal" class="text-danger"></span>
+	</div>
+
+	<div>
+		<label asp-for="CustCountry" class="control-label">Country</label>
+		<input asp-for="CustCountry" class="form-control" />
+		<span asp-validation-for="CustCountry" class="text-danger"></span>
+	</div>
+
+	<div>
+		<label asp-for="CustHomePhone" class="control-label">Home Phone Number</label>
+		<input asp-for="CustHomePhone" class="form-control" />
+		<span asp-validation-for="CustHomePhone" class="text-danger"></span>
+	</div>
+
+	<div>
+		<label asp-for="CustBusPhone" class="control-label">Business Phone Number</label>
+		<input asp-for="CustBusPhone" class="form-control" />
+		<span asp-validation-for="CustBusPhone" class="text-danger"></span>
+	</div>
+
+	<div>
+		<label asp-for="CustEmail" class="control-label">Email</label>
+		<input asp-for="CustEmail" class="form-control" />
+		<span asp-validation-for="CustEmail" class="text-danger"></span>
+	</div>
+
+	<div style="margin: 14px 5px 0px 11px;">
+		@if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+		{
+			<img src="@Model.ProfileImagePath" alt="Profile Image" width="150" height="150" />
+		}
+	</div>
+	<div class="form-group">
+		<label asp-for="ProfileImage" class="control-label">Update Profile Image</label>
+		<input asp-for="ProfileImage" type="file" class="form-control" accept=".jpg,.jpeg,.png,.gif" />
+		<span asp-validation-for="ProfileImage" class="text-danger"></span>
+	</div>
+
+	<div>
+		<input type="submit" value="Update Profile" class="btn btn-primary" />
+	</div>
+</form>
+</div>
