@@ -38,11 +38,11 @@
 								<a class="nav-link px-2 text-light @(ViewData["ActiveController"] as string == "Home" && ViewData["ActiveAction"] as string == "Contact" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link px-2 text-light @(ViewData["ActiveController"] as string == "Home" && ViewData["ActiveAction"] as string == "Privacy" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Privacy">Profile</a>
+								<a class="nav-link px-2 text-light @(ViewData["ActiveController"] as string == "Home" && ViewData["ActiveAction"] as string == "Privacy" ? "active" : "")" asp-area="" asp-controller="Account" asp-action="Profile">Profile</a>
 							</li>
 
 						</ul>
-@* 						<ul class="navbar-nav ms-auto">
+						@* 						<ul class="navbar-nav ms-auto">
 							<li class="nav-item">
 								<a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
 							</li>
@@ -51,16 +51,43 @@
 							</li>
 						</ul> *@
 					</div>
-
-					<!-- Align header-end to the right -->
-					<div class="header-end ms-auto">
-						<button type="button" class="btn btn-outline-light me-2">Login</button>
-						<button type="button" class="btn btn-warning">Sign-up</button>
-						<button type="button" class="btn btn-outline-light me-2">Log out</button>
-						<a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="/images/man.jpeg" alt="mdo" width="40" height="40" class="rounded-circle">
-						</a>
-					</div>
+				</div>
+				<div class="profile-header col">
+					@if (!User.Identity.IsAuthenticated)
+					{
+						<div class="col">
+							<button type="button" class="btn btn-outline-light me-2">Login</button>
+							<button type="button" class="btn btn-warning">Sign-up</button>
+						</div>
+					}
+					else
+					{
+						<div class="user-logout dropdown">
+							<a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
+								@ViewData["FirstName"] <img src="@ViewData["ProfilePicture"]" alt="Profile Picture" width="40" height="40" class="rounded-circle">
+							</a>
+							<ul class="dropdown-menu dropdown-menu-end text-small">
+								<li>
+									<a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">
+										Profile
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Settings">
+										Settings
+									</a>
+								</li>
+								<li>
+									<hr class="dropdown-divider">
+								</li>
+								<li>
+									<a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">
+										Log out
+									</a>
+								</li>
+							</ul>
+						</div>
+					}
 				</div>
 			</div>
 		</nav>

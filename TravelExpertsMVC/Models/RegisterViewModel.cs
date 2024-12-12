@@ -50,7 +50,9 @@ namespace TravelExpertsMVC.Models
         [Required]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Password does not match")]
-        public string ConfirmPassword {  get; set; }
+        public string ConfirmPassword { get; set; }
 
+        public IFormFile? ProfileImage { get; set; }
+        public string? ProfileImagePath { get; set; }
     }
 }

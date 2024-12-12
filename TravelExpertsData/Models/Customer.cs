@@ -43,6 +43,7 @@ public partial class Customer
     public string CustEmail { get; set; } = null!;
 
     public int? AgentId { get; set; }
+    public string? ProfileImagePath { get; set; }
 
     [ForeignKey("AgentId")]
     [InverseProperty("Customers")]

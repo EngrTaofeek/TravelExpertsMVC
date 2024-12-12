@@ -502,3 +502,13 @@ li strong {
     .tab-content.active {
         display: block;
     }
+
+.profile-header {
+    position: relative;
+    display: grid;
+    justify-content: flex-end;
+}
+
+.user-logout{
+    display:flex;
+}
