@@ -51,9 +51,15 @@
         </div>
     }
 
-    <form asp-action="Create" method="post">
+    <form asp-action="ContactUs" method="post">
+       
         <div class="form-group">
-            <textarea class="form-control" name="feedbackText" rows="5" placeholder="Enter your feedback here..." required></textarea>
+            <label for="email">Your Email</label>
+            <input type="email" class="form-control" name="customerEmail" id="email" placeholder="Enter your email address" required>
+        </div>
+        <div class="form-group mt-3">
+            <label for="feedback">Your Feedback</label>
+            <textarea class="form-control" name="feedbackText" id="feedback" rows="5" placeholder="Enter your feedback here..." required></textarea>
         </div>
         <div class="form-group text-center mt-3">
             <button type="submit" class="btn btn-primary">Send Feedback</button>

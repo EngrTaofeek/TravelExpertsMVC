@@ -4,62 +4,72 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Booking Details</h1>
-
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookingDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookingDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookingNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookingNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TravelersCount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TravelersCount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PaymentStatus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PaymentStatus)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Balance)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Balance)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalPaid)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalPaid)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Package)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Package.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TripTypeName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TripTypeName)
-        </dd>
-    </dl>
-</div>
-<div>
+<div class="container booking-container card-body" style="padding-bottom: 50px;">
+    <h1 class="text-center mb-4 ">Booking Details</h1>
     
-    <a asp-action="Index">Back to List</a>
+    <div class="row">
+        <!-- Package Image Section -->
+        <div class="col-md-6 booking-image">
+            <img id="booking-image" src="@Model.Package?.ImagePath" alt="Package Image" class="img-fluid">
+        </div>
+
+        <!-- Booking Form Section -->
+        <div class="col-md-6 booking-details">
+            <dl class="row">
+                <!-- Booking Date -->
+                <dt class="col-sm-4 text-secondary text-truncate">Booking Date</dt>
+                <dd class="col-sm-8 text-wrap">@Model.BookingDate?.ToString("yyyy-MM-dd")</dd>
+
+                <!-- Booking Number -->
+                <dt class="col-sm-4 text-secondary text-truncate">Booking Number</dt>
+                <dd class="col-sm-8 text-wrap">@Model.BookingNumber</dd>
+
+                <!-- Travelers Count -->
+                <dt class="col-sm-4 text-secondary text-truncate">Travelers Count</dt>
+                <dd class="col-sm-8 text-wrap">@Model.TravelersCount</dd>
+
+                <!-- Payment Status -->
+                <dt class="col-sm-4 text-secondary text-truncate">Payment Status</dt>
+                <dd class="col-sm-8 text-wrap">
+                    @if (Model.PaymentStatus == "Pending")
+                    {
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    }
+                    else if (Model.PaymentStatus == "Paid")
+                    {
+                        <span class="badge bg-success">Paid</span>
+                    }
+                    else if (Model.PaymentStatus == "Failed")
+                    {
+                        <span class="badge bg-danger">Failed</span>
+                    }
+                </dd>
+
+                <!-- Balance -->
+                <dt class="col-sm-4 text-secondary text-truncate">Balance</dt>
+                <dd class="col-sm-8 text-wrap">@Model.Balance.ToString("C")</dd>
+
+                <!-- Total Paid -->
+                <dt class="col-sm-4 text-secondary text-truncate">Total Paid</dt>
+                <dd class="col-sm-8 text-wrap">@Model.TotalPaid.ToString("C")</dd>
+
+                <!-- Package Name -->
+                <dt class="col-sm-4 text-secondary text-truncate">Package Name</dt>
+                <dd class="col-sm-8 text-wrap">@Model.Package.Name</dd>
+
+                <!-- Package Description -->
+                <dt class="col-sm-4 text-secondary text-truncate">Package Description</dt>
+                <dd class="col-sm-8 text-wrap">@Model.Package.Description</dd>
+
+                <!-- Trip Type Name -->
+                <dt class="col-sm-4 text-secondary text-truncate">Trip Type</dt>
+                <dd class="col-sm-8 text-wrap">@Model.TripTypeName</dd>
+            </dl>
+        </div>
+    </div>
+    <div class=" mt-4">
+        <a asp-action="Index" class="btn btn-primary btn-lg">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+    </div>
 </div>
