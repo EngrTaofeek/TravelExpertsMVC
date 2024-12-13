@@ -25,7 +25,12 @@ body {
     margin: 20px;
 }
 
-
+.container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
 
 /* General body styles imported */
 
@@ -431,9 +436,9 @@ li strong {
 
 /*  Stlyes for single page cover page webpage, the webpage is not expected to scroll and have everything fit in one screen */
 .cover-message {
-    padding: 2rem 0;
+    padding: 20px;
     background-color: #fff;
-    margin: 1rem 0;
+    margin: 20px;
     text-align: center;
 }
 
